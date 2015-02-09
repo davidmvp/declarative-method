@@ -1,0 +1,2 @@
+declarative 3 4 1
+parallel 4 2 10000

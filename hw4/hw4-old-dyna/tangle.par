@@ -1,0 +1,53 @@
+% A tangled family DAG for question 2b, with a "child"
+% and his/her various relatives.
+%
+% parent and child:    child <--> mom
+% siblings:            child <--> sibling
+% half siblings:       child <--> half-sibling
+% weird half siblings: child <--> weird half-sibling
+% aunt and nephew:     child <--> aunt
+% full first cousin:   child <--> cousin
+% weird first cousin:  child <--> weird cousin
+
+child("child","mom") := 0.5.
+child("child","dad") := 0.5.
+child("sibling","mom") := 0.5.
+child("sibling","dad") := 0.5.
+child("half-sibling","mom") := 0.5.
+child("half-sibling","step-dad") := 0.5.
+
+child("dad","grandpa") := 0.5.
+child("dad","grandma") := 0.5.
+child("uncle","grandpa") := 0.5.       % dad's brother
+child("uncle","grandma") := 0.5.
+child("half-uncle","grandpa") := 0.5.  % dad's half-brother
+child("half-uncle","step-grandma") := 0.5.
+
+child("weird half-sibling","mom") := 0.5.
+child("weird half-sibling","uncle") := 0.5.
+
+child("mom","granny") := 0.5.
+child("mom","gramps") := 0.5.
+child("aunt","granny") := 0.5.         % mom's sister
+child("aunt","gramps") := 0.5.
+child("cousin","aunt") := 0.5.         
+child("cousin","uncle by marriage") := 0.5.
+child("weird cousin","aunt") := 0.5.  
+child("weird cousin","half-uncle") := 0.5.
+
+% Make it even more tangled for question 2c:
+% "child" loves his relatives a bit too much.
+
+child("oops 1","child") := 0.5.    % sibling-sibling incest
+child("oops 1","sibling") := 0.5.
+child("oops 2","child") := 0.5.    % child-parent incest
+child("oops 2","mom") := 0.5.
+child("oops 3","child") := 0.5.    % cousin marriage
+child("oops 3","cousin") := 0.5.
+
+% Here's an example of second-generation incest: how inbred is 
+% "oops 4"?  Question 2b's approach get this one wrong; question 
+% 2c should get it right.
+
+child("oops 4", "oops 1") := 0.5.  
+child("oops 4", "oops 2") := 0.5.  
